@@ -82,35 +82,32 @@ public class SortedList {
 		}
 		else if (target.compareTo(searcher.getValue()) == 0)
 		{
-			ListNode temp = searcher.getNext();
+			Object temp = searcher.getValue();
 			head = searcher.getNext();
 			return temp;
 		}
-		else
+
+		while (true)
 		{
-			while (true)
+			if (searcher.getNext() == null)
 			{
-				if (searcher.getNext() == null)
-				{
-					return null;
-				}
-				else if (target.compareTo(searcher.getNext().getValue()) == 0)
-				{
-					ListNode temp = searcher.getNext();
-					searcher.setNext(searcher.getNext().getNext());
-					return temp;
-				}
-				else
-				{
-					searcher = searcher.getNext();
-				}
+				return null;
+			}
+			else if (target.compareTo(searcher.getNext().getValue()) == 0)
+			{
+				Object temp = searcher.getNext().getValue();
+				searcher.setNext(searcher.getNext().getNext());
+				return temp;
+			}
+			else
+			{
+				searcher = searcher.getNext();
 			}
 		}
 	}
 	
 	public String toString()
 	{
-
 		ListNode searcher = head;
 		String total  = "";
 		
