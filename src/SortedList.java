@@ -1,5 +1,14 @@
 
-// don't mention Student
+/******************************************************************************
+* Savion Sample
+* Elevator Class
+* Stores all of the information about a single elevator including:
+* the Requests/people inside of the elevator, the direction it's going, and
+* its current floor.
+* It provides methods to move the elevator and and down, to change the elevators
+* direction,  and to add a Request to the array list of passengers.
+*
+******************************************************************************/
 public class SortedList {
 	
 	private ListNode head;
@@ -45,33 +54,7 @@ public class SortedList {
 		}
 	}
 	
-	// ask user for id
-	// makes a student with that id and garbage everything else
-	// uses that garbage student in the paramaters
-	public Object search(Comparable target)
-	{	
-		ListNode searcher = head;
-		while (true)
-		{
-			if (searcher == null){
-				return null;
-			}
-			else if (target.compareTo(searcher.getValue()) < 0)
-			{
-				return null;
-			}
-			else if (target.compareTo(searcher.getValue()) == 0)
-			{
-				// Case 3b: Found
-				return searcher.getValue();
-			}
-			else
-			{
-				// Case 3c: Keep searching
-				searcher = searcher.getNext();
-			}
-		}
-	}
+	
 	
 	public Object remove(Comparable target)
 	{
@@ -101,6 +84,34 @@ public class SortedList {
 			}
 			else
 			{
+				searcher = searcher.getNext();
+			}
+		}
+	}
+	
+// ask user for id
+	// makes a student with that id and garbage everything else
+	// uses that garbage student in the paramaters
+	public Object search(Comparable target)
+	{	
+		ListNode searcher = head;
+		while (true)
+		{
+			if (searcher == null){
+				return null;
+			}
+			else if (target.compareTo(searcher.getValue()) < 0)
+			{
+				return null;
+			}
+			else if (target.compareTo(searcher.getValue()) == 0)
+			{
+				// Case 3b: Found
+				return searcher.getValue();
+			}
+			else
+			{
+				// Case 3c: Keep searching
 				searcher = searcher.getNext();
 			}
 		}
