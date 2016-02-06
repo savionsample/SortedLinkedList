@@ -1,15 +1,15 @@
 
 /******************************************************************************
 * Savion Sample
-* Elevator Class
-* Stores all of the information about a single elevator including:
-* the Requests/people inside of the elevator, the direction it's going, and
-* its current floor.
-* It provides methods to move the elevator and and down, to change the elevators
-* direction,  and to add a Request to the array list of passengers.
+* SortedList Class
+* 
+* Contains all the methods necessary for inserting, removing, and searching in
+* the SortedList. The SortedList is made up of ListNodes which contain Students
+* inside of their values. 
 *
 ******************************************************************************/
-public class SortedList {
+public class SortedList 
+{
 	
 	private ListNode head;
 	
@@ -18,8 +18,14 @@ public class SortedList {
 		head = null;
 	}
 	
+	/**
+	 * Inserts a new Student into a ListNode then into the SortedList
+	 * 
+	 * @param value
+	 */
 	public void insert(Comparable value)
 	{
+		// check first ListNode
 		if (head == null)
 		{
 			head = new ListNode(value, null);
@@ -30,6 +36,7 @@ public class SortedList {
 		}
 		else
 		{
+			// then check the rest of the ListNodes
 			ListNode searcher = head;
 			boolean done = false;
 			while (!done)
@@ -44,6 +51,7 @@ public class SortedList {
 				}
 				else
 				{
+					// keep searching
 					searcher = searcher.getNext();
 				}
 			}
@@ -54,11 +62,18 @@ public class SortedList {
 		}
 	}
 	
-	
-	
+	/**
+	 * Checks each ListNode until the target id is found, removes that ListNode
+	 * and returns the Student removed
+	 * 
+	 * @param target: fake Student with id # the method will search for
+	 * @return: the Student if found, null if not
+	 */
 	public Object remove(Comparable target)
 	{
 		ListNode searcher = head;
+		
+		// check the first node
 		if (head == null)
 		{
 			return null;
@@ -70,6 +85,7 @@ public class SortedList {
 			return temp;
 		}
 
+		// then check all nodes following
 		while (true)
 		{
 			if (searcher.getNext() == null)
@@ -84,14 +100,18 @@ public class SortedList {
 			}
 			else
 			{
+				// keep searching
 				searcher = searcher.getNext();
 			}
 		}
 	}
-	
-// ask user for id
-	// makes a student with that id and garbage everything else
-	// uses that garbage student in the paramaters
+
+	/**
+	 * searches for a Student in the list with a specific id # 
+	 * 
+	 * @param target: fake Student with id # the method will search for
+	 * @return: the Student if found, null if not
+	 */
 	public Object search(Comparable target)
 	{	
 		ListNode searcher = head;
@@ -106,17 +126,19 @@ public class SortedList {
 			}
 			else if (target.compareTo(searcher.getValue()) == 0)
 			{
-				// Case 3b: Found
 				return searcher.getValue();
 			}
 			else
 			{
-				// Case 3c: Keep searching
+				// keep searching
 				searcher = searcher.getNext();
 			}
 		}
 	}
 	
+	/**
+	 * returns the Student's info as a String
+	 */
 	public String toString()
 	{
 		ListNode searcher = head;
@@ -128,7 +150,6 @@ public class SortedList {
 			searcher = searcher.getNext();
 		}
 		return total;
-		
 	}
 
 }

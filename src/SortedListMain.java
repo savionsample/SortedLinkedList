@@ -4,15 +4,18 @@ import java.util.Scanner;
 *
 * Name: Savion Sample
 * Block: D
-* Date: 2/1/16
+* Date: 2/5/16
 *
 * Description:
 * A SortedList class that uses linked lists to store a list of Comparable
-* objects. The menu-driven interface gives the option to do:
+* objects. The menu-driven interface gives the option to: insert a Student,
+* remove a Student, search for an id, display all Students, show all the
+* possible commands, and quit.
 * 
 ******************************************************************************/
 
-public class SortedListMain {
+public class SortedListMain 
+{
 	
 	private static final Scanner SC = new Scanner(System.in);
 
@@ -24,6 +27,7 @@ public class SortedListMain {
 		System.out.println("Please enter a command:");
 		String userInput = SC.nextLine();
 		
+		// prompts the user and keeps cycling until the user wants to quit
 		while (!userInput.equals("q"))
 		{	
 			System.out.println("User's input: " + userInput);
@@ -38,7 +42,7 @@ public class SortedListMain {
 	/**
 	 * performs an action based on the user's input
 	 * 
-	 * @param queue: the entire queue
+	 * @param list: the entire SortedList
 	 * @param userInput: the command the user entered
 	 */
 	private static void processInput(SortedList list, String userInput)
@@ -50,27 +54,12 @@ public class SortedListMain {
 		else if(userInput.equals("r"))
 		{
 			Object temp = removeMain(list);
-			if (temp != null)
-			{
-				System.out.println(temp);
-			}
-			else
-			{
-				System.out.println("No person with that id was found.");
-			}
+			checkNull(temp);
 		}
 		else if(userInput.equals("s"))
 		{
 			Object temp = searchMain(list);
-			if (temp != null)
-			{
-				System.out.println(temp);
-			}
-			else
-			{
-				System.out.println("No person with that id was found.");
-			}
-			
+			checkNull(temp);
 		}
 		else if(userInput.equals("d"))
 		{
@@ -86,11 +75,39 @@ public class SortedListMain {
 		}
 	}
 	
+	/**
+	 * Checks to see if the Student exists
+	 * 
+	 * @param temp: the Student
+	 */
+	private static void checkNull(Object temp)
+	{
+		if (temp != null)
+		{
+			System.out.println(temp);
+		}
+		else
+		{
+			System.out.println("No person with that id was found.");
+		}
+	}
+	
+	/**
+	 * prints the entire SortedList
+	 * 
+	 * @param list: the SortedList
+	 */
 	private static void displayMain(SortedList list)
 	{
 		System.out.println(list.toString());
 	}
 	
+	/**
+	 * creates a new Student object with the user's input and
+	 * inserts it into the SortedList
+	 * 
+	 * @param list: the SortedList
+	 */
 	private static void insertMain(SortedList list)
 	{
 		System.out.println("Please enter the student's ID number");
@@ -100,31 +117,43 @@ public class SortedListMain {
 		System.out.println("Please enter the student's name");
 		String studentName = SC.nextLine();
 		
-		
 		Student newStudent = new Student(idNumber, studentName);
 		list.insert(newStudent);
 		System.out.println("Student " + studentName + " with id of " + idNumber 
 							+ " was inserted into the thing");
 	}
 	
+	/**
+	 * removes a student from SortedList with the id number the user entered.
+	 * 
+	 * @param list: the SortedList
+	 */
 	private static Object removeMain(SortedList list)
 	{
 		System.out.println("Please enter the id number you want to remove");
 		int idNumber = SC.nextInt();
 		SC.nextLine();
 		
-		Student trashBagDummy = new Student(idNumber, "Trash Bag");
-		return list.remove(trashBagDummy);
+		// create a dummy student (only the id # matters here) to search with
+		Student dummy = new Student(idNumber, "Name");
+		return list.remove(dummy);
 	}
 	
+	/**
+	 * search through the SortedList for a student with the user inputted id #
+	 * 
+	 * @param list: the SortedList
+	 * @return: the first occurence of a Student with that id #
+	 */
 	private static Object searchMain(SortedList list)
 	{
 		System.out.println("Please enter the id of the student you want to search");
 		int idNumber = SC.nextInt();
 		SC.nextLine();
 		
-		Student trashBagDumpster = new Student(idNumber, "Mr. Trashbag");
-		return list.search(trashBagDumpster);
+		// create a dummy student (only the id # matters here) to search with
+		Student dummy = new Student(idNumber, "Name");
+		return list.search(dummy);
 	}
 	
 	/**
